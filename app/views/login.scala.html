@@ -1,0 +1,67 @@
+@(form: Form[Application.Login])
+
+<html>
+    <head>
+    	<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta name="description" content="Incident management system">
+	    <meta name="author" content="">
+	    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+	    
+        <title>IMS Login</title>
+        <!-- Latest compiled and minified bootstrap -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		
+		<!--  Custom styles for this template -->
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        
+	    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	    <!--[if lt IE 9]>
+	      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	    <![endif]-->  
+    </head>
+    
+    <body>
+
+        
+        @helper.form(routes.Application.authenticate) {
+        
+        <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+		  <div class="modal-dialog">
+		  <div class="modal-content">
+		      <div class="modal-header">
+		          
+		          <h1 class="text-center">Login</h1>
+		      </div>
+		      <div class="modal-body">
+		      	@if(form.hasGlobalErrors) {
+		      		<p style="font-weight:800; color: red">@form.globalError.message</p>
+		      		}
+		      	@if(flash.contains("success")) {
+		      		<p style="font-weight:800; color: green">@flash.get("success")</p>
+		      	}
+		          <form class="form col-md-12 center-block">
+		            <div class="form-group">
+		              <input type="text" name="username" class="form-control input-lg" placeholder="Username" value="@form("username").value">
+		            </div>
+		            <div class="form-group">
+		              <input type="password" name="password" class="form-control input-lg" placeholder="Password">
+		            </div>
+		            <div class="form-group">
+		              <button class="btn btn-primary btn-lg btn-block">Sign In</button>
+		              
+		            </div>
+		          </form>
+		      </div>
+		  </div>
+		  </div>
+		</div>
+        	
+        }
+    
+    </body>
+</html>

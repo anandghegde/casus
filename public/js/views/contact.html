@@ -1,0 +1,136 @@
+<div>
+
+	<h2>Contact</h2>
+	
+	<form class="form-horizontal" role="form">
+				
+			
+		<div class="form-group">
+			<label for="inputFullname" class="col-sm-2 control-label">Fullname</label>
+			<div class="col-sm-10">
+				<input type="text" ng-model="contact.fullname" class="form-control" id="inputFullname">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Company</label>
+			<div class="col-sm-10 form-control-static">
+				<a href="#/companies/{{contactCompanies[0].id}}">{{contactCompanies[0].name}}</a>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="inputEmail" class="col-sm-2 control-label">Email</label>
+			<div class="col-sm-10">
+				<input type="email" ng-model="contact.email" class="form-control" id="inputEmail">
+			</div>
+		</div>			
+
+		<div class="form-group">
+			<label for="inputPhone" class="col-sm-2 control-label">Phone</label>
+			<div class="col-sm-10">
+				<input type="text" ng-model="contact.phone" class="form-control" id="inputPhone">
+				<br/>
+				
+				<div><button class="btn btn-primary" ng-click="update()">Update</button>
+					&nbsp;&nbsp;
+					<button class="btn btn-danger" ng-click="remove()">Remove</button>
+				</div>	
+			
+			</div>
+		</div>		
+				
+	</form>
+
+	<br/>
+	
+	<div class="row">
+		
+		<div class="col-sm-10 col-sm-offset-1">
+		
+			<h4>Incidents</h4>
+			
+			<table class="table table-hover">
+				<tr>
+					<th>ID</th>
+					<th>Priority</th>
+					<th>Date</th>
+					<th>Status</th>
+					<th>Category</th>
+					<th>Subject</th>
+				</tr>
+				
+				<tr ng-repeat="incident in contactIncidents">
+					<td><a href="#/incident/{{incident.id}}">{{ incident.id }}</a></td>
+					<td>{{ incident.priority }}
+						<span ng-show="incident.priority == 1">
+							<i class="fa fa-warning" style="color:red"></i>
+						</span>
+					</td>
+					<td>{{ incident.startdate | date:'short'}}</td>
+					<td>{{incident.status}}</td>
+					<td>{{incident.category.type}}</td>
+					<td>{{ incident.subject }}</td>
+				</tr>
+			
+			</table>
+			
+			<div ng-hide="contactIncidents.length">No incidents found.</div>
+			
+				<div ng-int="isHidden=true">
+					<button class="btn btn-success btn-sm" ng-click="isHidden=!isHidden"><i class="fa fa-plus"></i></button> 
+				</div>
+				
+				<!--  Create new incident  --------------------------------------->
+	
+				<div ng-show="isHidden" class="container incident-box my-show-hide-animation">
+				<h4>Create new incident</h4>
+				<form name="incidentForm" class="form-horizontal" role="form">
+							
+					<div class="form-group">
+						<div class="col-sm-10">
+							Requester: {{contact.fullname}}
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-10 form-control-static">
+							Priority: <select ng-model="newincident.priority" required="true">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+							</select> &nbsp;&nbsp;
+							
+							Category: <select ng-model="newincident.categoryId" 
+							ng-options="category.id as category.type for category in categories">
+							</select> &nbsp;&nbsp;
+				
+							Agent: <select ng-disabled="unassigned" ng-model="selectedAgent"
+									ng-options="agent.username as agent.fullname for agent in agents">
+							</select> &nbsp;&nbsp;
+							
+							Unassigned? <input type="checkbox" ng-model="unassigned">
+						</div>
+					</div>		
+					
+					<div class="form-group">
+						<div class="col-sm-10">
+							<input type="text" ng-required="true" ng-model="newincident.subject" class="form-control" id="inputsubject" placeholder="Subject">
+						</div>
+					</div>
+						
+					<div class="form-group">
+						<div class="col-sm-10">
+							<textarea class="form-control" ng-required="true" ng-model="newincident.description" rows="4" placeholder="Description"></textarea>
+							<br/>
+							<div><button class="btn btn-default" ng-disabled="incidentForm.$invalid" ng-click="create()">Create</button> </div>	
+						</div>
+					</div>
+							
+				</form>
+				
+				</div>
+		</div>
+	</div>	
+	
+</div>		

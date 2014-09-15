@@ -1,0 +1,120 @@
+<div>
+	<h2>My Incidents</h2>
+</div>
+
+<div>
+	<table class="table table-hover table-list">
+		<tr>
+			<th>ID</th>
+			<th>Priority</th>
+			<th>Date</th>
+			<th>Category</th>
+			<th>Requester</th>
+			<th>Subject</th>
+		</tr>
+		
+		<tr ng-repeat="incident in incident">
+			<td><a href="#/incident/{{incident.id}}">{{ incident.id }}</a></td>
+			<td>{{ incident.priority }}
+				<span ng-show="incident.priority == 1">
+					<i class="fa fa-warning" style="color:red"></i>
+				</span>
+			</td>
+			<td>{{ incident.startdate | date:'short'}}</td>
+			<td>{{incident.category.type}}</td>
+			<td><a href="#/contacts/{{incident.requester.id}}">{{ incident.requester.fullname }}</a></td>
+			<td>{{ incident.subject }}</td>
+		</tr>
+	
+	</table>
+	
+	<div ng-hide="incident.length">No incidents found.<br/></div>
+	
+	<div ng-int="isHidden=true">
+		<button class="btn btn-success btn-sm" ng-click="isHidden=!isHidden"><i class="fa fa-plus"></i></button> 
+	</div>
+	
+	<!--  Create new incident  --------------------------------------->
+	
+	<div ng-show="isHidden" class="container incident-box my-show-hide-animation">
+	<h4>Create new incident</h4>
+	<form name="incidentForm" class="form-horizontal" role="form">
+				
+		<div class="form-group">
+			<div class="col-sm-10">
+				<input type="text" ng-required="true" ng-model="selContactId" placeholder="Requester" 
+				typeahead="contact as contact.fullname for contact in getContacts($viewValue) | filter:{fullname:$viewValue}" 
+				typeahead-min-length="2" 
+				typeahead-editable="false" class="form-control">
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="col-sm-12 form-control-static">
+				Priority: <select ng-model="newincident.priority" required="true">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+				</select> &nbsp;&nbsp;
+				
+				Category: <select ng-model="newincident.categoryId" 
+				ng-options="category.id as category.type for category in categories">
+				</select> &nbsp;&nbsp;
+				
+				Agent: <select ng-disabled="unassigned" ng-model="selectedAgent"
+						ng-options="agent.username as agent.fullname for agent in agents">
+				</select> &nbsp;&nbsp;
+				
+				Unassigned? <input type="checkbox" ng-model="unassigned">
+			</div>
+		</div>		
+				
+		<div class="form-group">
+			<div class="col-sm-10">
+				<input type="text" ng-required="true" ng-model="newincident.subject" class="form-control" id="inputsubject" placeholder="Subject">
+			</div>
+		</div>
+			
+		<div class="form-group">
+			<div class="col-sm-10">
+				<textarea class="form-control" ng-required="true" ng-model="newincident.description" rows="4" placeholder="Description"></textarea>
+				<br/>
+				<div><button class="btn btn-default" ng-disabled="incidentForm.$invalid" ng-click="create()">Create</button> </div>	
+			</div>
+		</div>
+				
+	</form>
+	
+	</div>
+	
+	<div>
+		<h2>Unassigned Incidents</h2>
+	</div>
+
+	<table class="table table-hover">
+		<tr>
+			<th>ID</th>
+			<th>Priority</th>
+			<th>Date</th>
+			<th>Category</th>
+			<th>Requester</th>
+			<th>Subject</th>
+		</tr>
+		
+		<tr ng-repeat="unassignedIncident in unassignedIncident">
+			<td><a href="#/incident/{{unassignedIncident.id}}">{{ unassignedIncident.id }}</td>
+			<td>{{ unassignedIncident.priority }}
+				<span ng-show="unassignedIncident.priority == 1">
+					<i class="fa fa-warning" style="color:red"></i>
+				</span>
+			</td>
+			<td>{{ unassignedIncident.startdate | date:'MMM dd yyyy hh:mma' }}</td>
+			<td>{{unassignedIncident.category.type}}</td>
+			<td><a href="#/contacts/{{unassignedIncident.requester.id}}">{{ unassignedIncident.requester.fullname }}</a></td>
+			<td>{{ unassignedIncident.subject }}</td>
+		</tr>
+	
+	</table>
+	
+	<div ng-hide="unassignedIncident.length">No unassigned incidents found.</div>
+</div>		
