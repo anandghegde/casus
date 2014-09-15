@@ -6,18 +6,18 @@ ims.controller('getContact', function ($scope, $routeParams, $http, $location) {
             $scope.contact = data;
         });
     
-    // get the current agent info
-    $http.get(remoteServer+'/agent').
+    // get the current assignee info
+    $http.get(remoteServer+'/assignee').
     success(function(data) {
     
-    	$scope.currentAgent = data;
-    	$scope.selectedAgent = data.username;
+    	$scope.currentAssignee = data;
+    	$scope.selectedAssignee = data.username;
     });
     
-    // get the list of agents
-	$http.get(remoteServer+'/agents').
+    // get the list of assignees
+	$http.get(remoteServer+'/assignees').
     success(function(data) {
-        $scope.agents = data;
+        $scope.assignees = data;
          
     });
 	
@@ -34,11 +34,6 @@ ims.controller('getContact', function ($scope, $routeParams, $http, $location) {
         $scope.contactIncidents = data;
     });
     
-    // get all the companies associated with the contact
-    $http.get(remoteServer+'/contacts/' + $routeParams.contactId + '/companies').
-    success(function(data) {
-        $scope.contactCompanies = data;
-    });  
 
    // remove the contact (de-activate)
     $scope.remove = function() {
@@ -150,13 +145,13 @@ ims.controller('getContact', function ($scope, $routeParams, $http, $location) {
    $scope.create = function() {
     	
 	   console.log("create incident");
-	   var agent = "";
+	   var assignee = "";
 	   
-	   // check to see if the agent was unassigned
-	   agent = ($scope.unassigned) ? "unassigned" : $scope.selectedAgent;
+	   // check to see if the assignee was unassigned
+	   assignee = ($scope.unassigned) ? "unassigned" : $scope.selectedAssignee;
 	   
 	    // create an object to hold the form values 
-    	var dataObj = { "username" : agent,
+    	var dataObj = { "username" : assignee,
     					"categoryId" : $scope.newincident.categoryId,
     					"subject" : $scope.newincident.subject,
     					"description" : $scope.newincident.description,

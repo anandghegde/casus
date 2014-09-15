@@ -1,4 +1,4 @@
-@(agent: Agent)
+@(assignee: Assignee)
 <!DOCTYPE html>
 
 <html lang="en" ng-app="ims">
@@ -11,7 +11,7 @@
 	    <meta name="author" content="">
 	    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
 	    
-        <title>SimpleIMS</title>
+        <title>Casus</title>
         <!-- Latest compiled and minified bootstrap -->
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
@@ -39,7 +39,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#" style="color:yellow"><strong>Jam Buster Inci <i class="fa fa-fire"></i></strong></a>
+          <a class="navbar-brand" href="#" style="color:yellow"><strong>Casus<i class="fa fa-fire"></i></strong></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav" bs-navbar>
@@ -49,7 +49,7 @@
             
           </ul>
           <ul class="nav navbar-nav navbar-right">
-        	<li> <a href="@routes.Application.logout()">Logout (@agent.username)</a></li>
+        	<li> <a href="@routes.Application.logout()">Logout (@assignee.username)</a></li>
        	  </ul>
         </div><!--/.nav-collapse -->
        
@@ -69,7 +69,7 @@
 		<div id="footer-content" class="row">
 			<div class="col-sm-4">
 
-				<div>&copy;2014, Jam Busters</div>
+				<div>&copy;2014, Whatever</div>
 
 			</div>
 
@@ -112,8 +112,6 @@
 	<script src="@routes.Assets.at("js/ui-bootstrap-tpls-0.10.0.min.js")"></script>
 	<script src="@routes.Assets.at("js/pnotify.custom.min.js")"></script>
 	<script src="@routes.Assets.at("js/controllers/controller.js")"></script>
-	<script src="@routes.Assets.at("js/controllers/companies.js")"></script>
-	<script src="@routes.Assets.at("js/controllers/company.js")"></script>
 	<script src="@routes.Assets.at("js/controllers/contact.js")"></script>
 	<script src="@routes.Assets.at("js/controllers/contacts.js")"></script>
 	<script src="@routes.Assets.at("js/controllers/dashboard.js")"></script>

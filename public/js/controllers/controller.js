@@ -33,16 +33,6 @@ ims.config(function ($routeProvider) {
 				controller: 'getIncident',
 				templateUrl: '/assets/js/views/incident.html'
 			})
-		.when('/companies/:companyId',
-			{
-				controller: 'getCompany',
-				templateUrl: '/assets/js/views/company.html'
-			})				
-		.when('/companies',
-			{
-				controller: 'getCompanies',
-				templateUrl: '/assets/js/views/companies.html'
-			})			
 		.when('/contacts',
 			{
 				controller: 'getContacts',

@@ -13,7 +13,7 @@ import play.data.validation.*;
 
 import java.util.*;
 
-// An Action represents a unit of work spent by an Agent on a specific incident 
+// An Action represents a unit of work spent by an Assignee on a specific incident 
 @Entity
 public class Category extends Model {
 	

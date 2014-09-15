@@ -6,7 +6,7 @@ ims.controller('getDashboard', function ($scope, $http) {
 	function loadIncidentData(){
 		
 	
-		// get the open incidents for the current agent
+		// get the open incidents for the current assignee
 	    $http.get(remoteServer+'/incidents?status=open').
 	        success(function(data) {
 	            $scope.incident = data;
@@ -21,18 +21,18 @@ ims.controller('getDashboard', function ($scope, $http) {
 	    });
 	};
 	
-    // get the current agent info
-    $http.get(remoteServer+'/agent').
+    // get the current assignee info
+    $http.get(remoteServer+'/assignee').
     success(function(data) {
     
-    	$scope.currentAgent = data;
-    	$scope.selectedAgent = data.username;
+    	$scope.currentAssignee = data;
+    	$scope.selectedAssignee = data.username;
     });
     
-    // get the list of agents
-	$http.get(remoteServer+'/agents').
+    // get the list of assignees
+	$http.get(remoteServer+'/assignees').
     success(function(data) {
-        $scope.agents = data;
+        $scope.assignees = data;
          
     });
 	
@@ -63,13 +63,13 @@ ims.controller('getDashboard', function ($scope, $http) {
 	   $scope.create = function() {
 	    	
 		   console.log("create incident");
-		   var agent = "";
+		   var assignee = "";
 		   
-		   // check to see if the agent was unassigned
-		   agent = ($scope.unassigned) ? "unassigned" : $scope.selectedAgent;
+		   // check to see if the assignee was unassigned
+		   assignee = ($scope.unassigned) ? "unassigned" : $scope.selectedAssignee;
 		   
 		    // create an object to hold the form values 
-	    	var dataObj = { "username" : agent,
+	    	var dataObj = { "username" : assignee,
 	    					"categoryId" : $scope.newincident.categoryId,
 	    					"subject" : $scope.newincident.subject,
 	    					"description" : $scope.newincident.description,
@@ -93,7 +93,7 @@ ims.controller('getDashboard', function ($scope, $http) {
 	    					delay: 3000
 	    				});
 	    				
-	    				if (agent == "unassigned") {
+	    				if (assignee == "unassigned") {
 	    					
 	    				    loadUnassignedData();
 	    				    

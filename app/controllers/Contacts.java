@@ -71,13 +71,6 @@ public class Contacts extends Controller {
 
 	}
 
-	// get companies associated with a specific contact
-	public static Result getCompanies(Integer id) {
-			
-		return ok(Json.toJson(Company.find.where().eq("contacts.id", id).findList()));
-
-	}
-	
 	// get incidents associated with a specific contact based on status
 	public static Result getIncidents(Integer id, String status) {
 		

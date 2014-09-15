@@ -11,19 +11,14 @@ public class Global extends GlobalSettings {
     @Override
     public void onStart(Application app) {
         // Check if the database is empty
-        if (Agent.find.findRowCount() == 0) {
+        if (Assignee.find.findRowCount() == 0) {
         	
         	// load the data from a yaml file
         	Map<String,List<Object>> all = (Map<String,List<Object>>)Yaml.load("testdata.yml");
         	
-        	// Insert agents first
-        	Ebean.save(all.get("agents"));
+        	// Insert assignees first
+        	Ebean.save(all.get("assignees"));
         	
-        	// Insert companies 
-        	Ebean.save(all.get("companies"));
-     
-        	// Insert addresses 
-        	Ebean.save(all.get("addresses"));
         	
         	// Insert contacts 
         	Ebean.save(all.get("contacts"));

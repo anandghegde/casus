@@ -13,26 +13,26 @@ import views.html.*;
 import play.libs.Json;
 
 @Security.Authenticated(Authenticated.class)
-public class Agents extends Controller {
+public class Assignees extends Controller {
 
-	// get info on the currently logged in agent
+	// get info on the currently logged in assignee
 	public static Result current() {
-		return ok(Json.toJson(Agent.find.byId(Context.current().request().username())));
+		return ok(Json.toJson(Assignee.find.byId(Context.current().request().username())));
 	}
 	
-	// get info for a specific agent
+	// get info for a specific assignee
 	public static Result get(String username) {
-		return ok(Json.toJson(Agent.find.byId(username)));
+		return ok(Json.toJson(Assignee.find.byId(username)));
 	}
 
-	// get incidents associated with a specific agent
+	// get incidents associated with a specific assignee
 	public static Result getIncidents(String username) {
 		return ok(Json.toJson(Incident.find.where().eq("owner_username", username).findList()));
 	}
 	
-	// get a list of all active agents
+	// get a list of all active assignees
 	public static Result list() {
-		return ok(Json.toJson(Agent.find.where().eq("active", true).findList()));
+		return ok(Json.toJson(Assignee.find.where().eq("active", true).findList()));
 	}
 	
 }

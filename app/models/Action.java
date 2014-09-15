@@ -13,7 +13,7 @@ import play.data.validation.*;
 
 import java.util.*;
 
-// An Action represents a unit of work spent by an Agent on a specific incident 
+// An Action represents a unit of work spent by an assignee on a specific incident 
 @Entity
 public class Action extends Model {
 	
@@ -21,25 +21,25 @@ public class Action extends Model {
 	public int id;
 	public Date startdate;
 	@ManyToOne
-	public Agent agent;
+	public Assignee assignee;
 	public String description;
 	@ManyToOne
 	@JsonBackReference
 	public Incident incident;
 	
 	// constructor methods
-	public Action(Date startdate, Agent agent, String description, Incident incident){
+	public Action(Date startdate, Assignee assignee, String description, Incident incident){
 		this.startdate = startdate;
-		this.agent = agent;
+		this.assignee = assignee;
 		this.description = description;
 		this.incident = incident;
 	}
 	
-	public static Action create(String agentUsername, String description, int incidentId){
+	public static Action create(String assigneeUsername, String description, int incidentId){
 		Date startdate = Calendar.getInstance().getTime();
 		Action action = new Action(
 				startdate,
-				Agent.find.ref(agentUsername), 
+				Assignee.find.ref(assigneeUsername), 
 				description, 
 				Incident.find.ref(incidentId));
 		action.save();

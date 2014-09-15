@@ -1,120 +1,43 @@
 ---
-# Agents
+# Assignees
 
-agents:
+assignees:
 
-  - !!models.Agent
+  - !!models.Assignee
       username:   unassigned
       password:   $2a$10$g6YPYnUM1XEfsL55.xdH1u2Ug0C6CGMVLNgw5MG0oKCOlBp1ksIde
       fullname:   Unassigned
       email:      
       active:     false
   
-  - !!models.Agent
+  - !!models.Assignee
       username:   jacksmith
       password:   $2a$10$g6YPYnUM1XEfsL55.xdH1u2Ug0C6CGMVLNgw5MG0oKCOlBp1ksIde
       fullname:   Jack Smith
       email:      jack@bigsoftware.com
       active:     true
 
-  - !!models.Agent
+  - !!models.Assignee
       username:   benj
       password:   $2a$10$g6YPYnUM1XEfsL55.xdH1u2Ug0C6CGMVLNgw5MG0oKCOlBp1ksIde
       fullname:   Ben Johnson
       email:      benj@bigsoftware.com
       active:     true
 
-  - !!models.Agent
+  - !!models.Assignee
       username:   jwilliams
       password:   $2a$10$g6YPYnUM1XEfsL55.xdH1u2Ug0C6CGMVLNgw5MG0oKCOlBp1ksIde
       fullname:   Jill Williams
       email:      jwilliams@bigsoftware.com
       active:     true
 
-  - !!models.Agent
+  - !!models.Assignee
       username:   sgoresh
       password:   $2a$10$g6YPYnUM1XEfsL55.xdH1u2Ug0C6CGMVLNgw5MG0oKCOlBp1ksIde
       fullname:   Saron Goresh
       email:      saron.goresh@bigsoftware.com
       active:     true      
 
-# Companies
-
-companies: 
-
-  - &company1 !!models.Company
-    name:       Acme Corporation
-    notes:      A great place to work.
-    website:    www.acmecorporation.com
-    active:     true
-    
-  - &company2 !!models.Company
-    name:       The Widget Factory
-    notes:      We like to build stuff.
-    website:    www.thewidgetfactory.com
-    active:     true
-   
-  - &company3 !!models.Company
-    name:       Standard Products Corporation
-    notes:      Product distribution all over the world.
-    website:    www.standardproducts.com
-    active:     true
-
-  - &company4 !!models.Company
-    name:       Aeroplat Industries
-    notes:      Diversified conglomerate of distributed entities.
-    website:    www.aeroplat.se
-    active:     true
- 
-  - &company5 !!models.Company
-    name:       Big World Players Ltd.
-    notes:      
-    website:    www.bigworldplayers.io
-    active:     true
-           
-# Addresses
-
-addresses:
-
-  - !!models.Address
-      address1:   123 Way Lane
-      address2:   Suite 105
-      city:       Minneapolis
-      state:      Minnesota
-      zipcode:    55401
-      company:    *company1
-
-  - !!models.Address
-      address1:   455 Starry Road
-      address2:   2nd Floor
-      city:       Orlando
-      state:      Florida
-      zipcode:    32801
-      company:    *company2
-  
-  - !!models.Address
-      address1:   782 Flowy Point Drive
-      address2:   
-      city:       Novato
-      state:      California
-      zipcode:    90234
-      company:    *company3
-
-  - !!models.Address
-      address1:   781N 43rd Street 
-      address2:   1st Floor
-      city:       New York
-      state:      New York
-      zipcode:    10243
-      company:    *company4
-            
-  - !!models.Address
-      address1:   19029 Oak River Circle
-      address2:   
-      city:       Wabakanaba 
-      state:      Washington
-      zipcode:    32454
-      company:    *company5  
                           
 # Contacts
 
@@ -125,56 +48,48 @@ contacts:
       fullname:   Bill Richards
       phone:      612-584-4888
       active:     true
-      company:    *company1
 
   - &contact2 !!models.Contact
       email:      bgoodwin@acme.com
       fullname:   Beth Goodwin
       phone:      612-584-3342
       active:     true
-      company:    *company1
     
   - &contact3 !!models.Contact
       email:      tanya@widgetfactory.com
       fullname:   Tanya Goldberg
       phone:      443-234-2156
       active:     true
-      company:    *company2
 
   - &contact4 !!models.Contact
       email:      steven@aeroplat.se
       fullname:   Steven Schultz
       phone:      425-444-2156
       active:     true
-      company:    *company4
 
   - &contact5 !!models.Contact
       email:      lilly@aeroplat.se
       fullname:   Lilly Fields
       phone:      425-434-0934
       active:     true
-      company:    *company4
 
   - &contact6 !!models.Contact
       email:      tomb@bigworldplayers.io
       fullname:   Tom Brandberg
       phone:      888-324-4536
       active:     true
-      company:    *company5
 
   - &contact7 !!models.Contact
       email:      julaz@bigworldplayers.io
       fullname:   Jula Zabrini
       phone:      888-377-3453
       active:     true
-      company:    *company5
 
   - &contact8 !!models.Contact
       email:      chil@bigworldplayers.io
       fullname:   Chi Lai
       phone:      888-345-4909
       active:     true
-      company:    *company5
 
 # Categories
 
@@ -206,7 +121,7 @@ categories:
 incidents:
 
   - &incident1 !!models.Incident
-      owner:      !!models.Agent
+      owner:      !!models.Assignee
                       username: jacksmith
       category: !!models.Category
                       id: 5
@@ -221,7 +136,7 @@ incidents:
                 
 
   - &incident2 !!models.Incident
-      owner:      !!models.Agent
+      owner:      !!models.Assignee
                       username: jacksmith
       category: !!models.Category
                       id: 3
@@ -234,7 +149,7 @@ incidents:
       requester:  *contact2
 
   - &incident3 !!models.Incident
-      owner:      !!models.Agent
+      owner:      !!models.Assignee
                       username: jacksmith
       category: !!models.Category
                       id: 2
@@ -247,7 +162,7 @@ incidents:
       requester:  *contact7
 
   - &incident4 !!models.Incident
-      owner:      !!models.Agent
+      owner:      !!models.Assignee
                       username: jacksmith
       category: !!models.Category
                       id: 4
@@ -260,7 +175,7 @@ incidents:
       requester:  *contact6      
       
   - &incident5 !!models.Incident
-      owner:      !!models.Agent
+      owner:      !!models.Assignee
                       username: benj
       category: !!models.Category
                       id: 2
@@ -273,7 +188,7 @@ incidents:
       requester:  *contact3 
 
   - &incident6 !!models.Incident
-      owner:      !!models.Agent
+      owner:      !!models.Assignee
                       username: benj
       category: !!models.Category
                       id: 1
@@ -286,7 +201,7 @@ incidents:
       requester:  *contact5 
 
   - &incident7 !!models.Incident
-      owner:      !!models.Agent
+      owner:      !!models.Assignee
                       username: benj
       category: !!models.Category
                       id: 5
@@ -299,7 +214,7 @@ incidents:
       requester:  *contact8 
 
   - &incident8 !!models.Incident
-      owner:      !!models.Agent
+      owner:      !!models.Assignee
                       username: benj
       category: !!models.Category
                       id: 5
@@ -312,7 +227,7 @@ incidents:
       requester:  *contact7 
  
   - &incident9 !!models.Incident
-      owner:      !!models.Agent
+      owner:      !!models.Assignee
                       username: benj
       category: !!models.Category
                       id: 5
@@ -325,7 +240,7 @@ incidents:
       requester:  *contact5 
                        
   - &incident10 !!models.Incident
-      owner:      !!models.Agent
+      owner:      !!models.Assignee
                       username: jwilliams
       category: !!models.Category
                       id: 5
@@ -338,7 +253,7 @@ incidents:
       requester:  *contact1
 
   - &incident11 !!models.Incident
-      owner:      !!models.Agent
+      owner:      !!models.Assignee
                       username: jwilliams
       category: !!models.Category
                       id: 4
@@ -351,7 +266,7 @@ incidents:
       requester:  *contact2
                                      
   - &incident12 !!models.Incident
-      owner:      !!models.Agent
+      owner:      !!models.Assignee
                       username: unassigned
       category: !!models.Category
                       id: 1
@@ -364,7 +279,7 @@ incidents:
       requester:  *contact1 
  
   - &incident13 !!models.Incident
-      owner:      !!models.Agent
+      owner:      !!models.Assignee
                       username: unassigned
       category: !!models.Category
                       id: 5
@@ -377,7 +292,7 @@ incidents:
       requester:  *contact6 
  
   - &incident14 !!models.Incident
-      owner:      !!models.Agent
+      owner:      !!models.Assignee
                       username: unassigned
       category: !!models.Category
                       id: 4
@@ -395,42 +310,42 @@ actions:
 
   - !!models.Action
       startdate:  "2014-04-08 08:03:17"
-      agent:      !!models.Agent
+      assignee:      !!models.Assignee
                       username: jacksmith
       description: I contacted the customer and walked through a process to reproduce the application failure.
       incident:   *incident1                                                                               
  
   - !!models.Action
       startdate:  "2014-04-09 12:23:22"
-      agent:  !!models.Agent
+      assignee:  !!models.Assignee
                     username: jacksmith
       description: The customer is now seeing a different error while trying to use the application.
       incident: *incident1
 
   - !!models.Action
       startdate:  "2014-04-09 18:21:44"
-      agent:      !!models.Agent
+      assignee:      !!models.Assignee
                       username: benj
       description: I reset the application database. I asked our DBAs to review the system error logs.
       incident:   *incident5
 
   - !!models.Action
       startdate:  "2014-04-09 12:53:33"
-      agent:      !!models.Agent
+      assignee:      !!models.Assignee
                       username: jacksmith
       description: The customer is now seeing a different error while trying to use the application.
       incident:   *incident3  
 
   - !!models.Action
       startdate:  "2014-04-19 11:53:22"
-      agent:      !!models.Agent
+      assignee:      !!models.Assignee
                       username: benj
       description: I asked the customer to clear the cache on their browser. They were able to successfully load the site.
       incident:   *incident9  
       
   - !!models.Action
       startdate:  "2014-04-19 11:53:22"
-      agent:      !!models.Agent
+      assignee:      !!models.Assignee
                       username: jwilliams
       description: I was able to reload the application data for the customer.
       incident:   *incident10    

@@ -21,22 +21,17 @@ public class Contact extends Model {
 	public String phone;
 	public Boolean active;
 	
-	@ManyToOne
-	@JsonBackReference
-	public Company company;
 	
 	//constructor
-	public Contact(String email, String fullname, String phone, Company company){
+	public Contact(String email, String fullname, String phone){
 		this.email = email;
 		this.fullname = fullname;
 		this.phone = phone;
-		this.company = company;
 		this.active = true;
 	}
 	
-	public static Contact create(String email, String fullname, String phone, int companyId) {
-		Company company = Company.find.byId(companyId);
-		Contact contact = new Contact(email, fullname, phone, company);
+	public static Contact create(String email, String fullname, String phone) {
+		Contact contact = new Contact(email, fullname, phone);
 		contact.save();
 		return contact;
 	}

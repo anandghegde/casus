@@ -132,11 +132,11 @@ public class Incidents extends Controller {
 	@BodyParser.Of(BodyParser.Json.class)
 	public static Result update(int incident) {
 		// determine the owner of the incident
-		Agent agent = Incident.find.byId(incident).owner;
+		Assignee assignee = Incident.find.byId(incident).owner;
 		
-		//user is allowed to update the incident if the user is the owner (agent)
+		//user is allowed to update the incident if the user is the owner (assignee)
 		//or the incident is unassigned
-		if (Authenticated.isOwnerOf(incident) || agent.username.equals("unassigned")) {
+		if (Authenticated.isOwnerOf(incident) || assignee.username.equals("unassigned")) {
 			
 			// retrieve json from the request body
 			JsonNode json = request().body().asJson();

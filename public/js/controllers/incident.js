@@ -6,31 +6,26 @@ ims.controller('getIncident', function ($scope, $routeParams, $http, $location) 
         success(function(data) {
             $scope.incident = data;
             
-        	// get the company associated with the incident
-        	$http.get(remoteServer+'/contacts/'+ $scope.incident.requester.id + '/companies').
-            success(function(data) {
-                $scope.company = data;
-                
-            	// get the list of agents
-            	$http.get(remoteServer+'/agents').
+            	// get the list of assignees
+            	$http.get(remoteServer+'/assignees').
                 success(function(data) {
-                    $scope.agents = data;
+                    $scope.assignees = data;
                     
-                    $scope.selectedAgent = "";
+                    $scope.selectedAssignee = "";
                     
-                    // need to figure out which agent owns the incident to display a name in the form selector
+                    // need to figure out which assignee owns the incident to display a name in the form selector
                     // but don't try to figure it out if the incident has no owner (unassigned)
                     if ($scope.incident.owner.username != 'unassigned') {
 	                    
 
-	                	for (var i = 0; i < $scope.agents.length; i++) {
-	                		if ($scope.agents[i].username == $scope.incident.owner.username) {
-	                			$scope.selectedAgent = $scope.agents[i].username;
+	                	for (var i = 0; i < $scope.assignees.length; i++) {
+	                		if ($scope.assignees[i].username == $scope.incident.owner.username) {
+	                			$scope.selectedAssignee = $scope.assignees[i].username;
 	                		}
 	                	
 	                	}
                     } else {
-                    	// set an attribute if the incident does not have an assigned agent
+                    	// set an attribute if the incident does not have an assigned assignee
                     	$scope.unassigned = true;
                     }
                     
@@ -45,7 +40,6 @@ ims.controller('getIncident', function ($scope, $routeParams, $http, $location) 
                 });
             	
             	
-            });
         });
 	
 		
@@ -106,12 +100,12 @@ ims.controller('getIncident', function ($scope, $routeParams, $http, $location) 
 	    	
 		   console.log("close incident");
 		   
-		// get the current agent
-       	$http.get(remoteServer+'/agent').
+		// get the current assignee
+       	$http.get(remoteServer+'/assignee').
            success(function(data) {
-               var agent = data;
+               var assignee = data;
                	
-               	if (agent.username == $scope.selectedAgent) {
+               	if (assignee.username == $scope.selectedAssignee) {
 				    // create an object to hold the form values 
 			    	var dataObj = { };
 			    	
@@ -149,11 +143,11 @@ ims.controller('getIncident', function ($scope, $routeParams, $http, $location) 
 			    		});
                	} else {
                		
-               		// report that the current agent does not own the incident
+               		// report that the current assignee does not own the incident
                		$(function(){
 	    				new PNotify({
 						    title: 'Warning',
-						    text: 'Unable to close incident because the agent is not the owner.',
+						    text: 'Unable to close incident because the assignee is not the owner.',
 						    type: 'error',
 						    styling: 'bootstrap3',
 						    delay:5000
@@ -170,7 +164,7 @@ ims.controller('getIncident', function ($scope, $routeParams, $http, $location) 
 		   console.log("update incident");
 		   
 		    // create an object to hold the form values 
-	    	var dataObj = { "username" : $scope.selectedAgent,
+	    	var dataObj = { "username" : $scope.selectedAssignee,
 	    					"categoryId" : $scope.selectedCategory,
 	    					"subject" : $scope.incident.subject,
 	    					"description" : $scope.incident.description,

@@ -21,7 +21,7 @@ public class Incident extends Model {
 	@Id
 	public int id;
 	@ManyToOne
-	public Agent owner;
+	public Assignee owner;
 	
 	@ManyToOne
 	public Category category;
@@ -42,7 +42,7 @@ public class Incident extends Model {
 	public List<Action> actions;
 	
 	// constructor for new incident
-	public Incident(Agent owner, Category category, String subject, String description, 
+	public Incident(Assignee owner, Category category, String subject, String description, 
 			Date startdate, Date enddate, int priority, String status, Contact requester) {
 			this.owner = owner;
 			this.category = category;
@@ -72,7 +72,7 @@ public class Incident extends Model {
 	// creator method
 	public static Incident create(String username, int categoryId, String subject, String description, int priority, int contactId) {
 		Date startdate = Calendar.getInstance().getTime();
-		Incident incident = new Incident(Agent.find.ref(username), 
+		Incident incident = new Incident(Assignee.find.ref(username), 
 				Category.find.byId(categoryId),
 				subject, 
 				description, 
@@ -115,7 +115,7 @@ public class Incident extends Model {
 	
 	public static Incident update(int incidentId, String username, int categoryId, String subject, String description, int priority, int contactId) {
 		Incident incident = find.ref(incidentId);
-		incident.owner = Agent.find.ref(username);
+		incident.owner = Assignee.find.ref(username);
 		incident.category = Category.find.byId(categoryId);
 		incident.subject = subject;
 		incident.description = description;

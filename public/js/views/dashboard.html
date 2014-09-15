@@ -61,8 +61,8 @@
 				ng-options="category.id as category.type for category in categories">
 				</select> &nbsp;&nbsp;
 				
-				Agent: <select ng-disabled="unassigned" ng-model="selectedAgent"
-						ng-options="agent.username as agent.fullname for agent in agents">
+				Assignee: <select ng-disabled="unassigned" ng-model="selectedAssignee"
+						ng-options="assignee.username as assignee.fullname for assignee in assignees">
 				</select> &nbsp;&nbsp;
 				
 				Unassigned? <input type="checkbox" ng-model="unassigned">

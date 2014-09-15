@@ -24,7 +24,7 @@ public class Application extends Controller {
 	@Security.Authenticated(Authenticated.class)
     public static Result index() {
         return ok(index.render(
-        		Agent.find.byId(request().username())
+        		Assignee.find.byId(request().username())
         		));
     }
     
@@ -47,7 +47,7 @@ public class Application extends Controller {
     	public String password;
     	
     	public String validate() {
-    		if (Agent.authenticate(username, password) == null) {
+    		if (Assignee.authenticate(username, password) == null) {
     			return "Invalid username or password";
     		}
     		return null;
