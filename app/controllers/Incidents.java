@@ -1,8 +1,10 @@
 package controllers;
 
+import org.apache.commons.mail.*;
 import play.*;
 import play.mvc.*;
 import play.data.*;
+import play.Logger;
 import static play.data.Form.*;
 
 import java.util.*;
@@ -40,6 +42,8 @@ public class Incidents extends Controller {
 				jsonPriority.asInt(),
 				jsonContactId.asInt()
 				);
+
+        sendEmailOnCreationOfIncident(newIncident.id, newIncident.owner.email);
 		
 		// return the created incident back to the user in json
 		return ok(Json.toJson(newIncident));
@@ -68,6 +72,40 @@ public class Incidents extends Controller {
 			return forbidden();
 		}
 	}
+
+
+    public static void sendEmail(String subject, String body, String sendToEmailAddress)
+    {
+        try
+        {
+            Email email = new SimpleEmail();
+            email.setHostName("smtp.googlemail.com");
+            email.setSmtpPort(465);
+            email.setAuthenticator(new DefaultAuthenticator("akamaitechjam@gmail.com", "NowYouSeeMe"));
+            email.setSSLOnConnect(true);
+            email.setFrom("akamaitechjam@gmail.com");
+            email.addTo(sendToEmailAddress);
+            email.setSubject(subject);
+            email.setMsg(body);
+            email.send();
+        }
+        catch(Exception exc)
+        {
+            Logger.info("Exception caught while sending email");
+            Logger.error("Exception: " , exc);
+        }
+
+    }
+
+    //send email
+    public static void sendEmailOnCreationOfIncident(int incidentId, String contactEmailId)
+    {
+            Incident newlyCreatedIncident = Incident.find.byId(incidentId);
+
+            String emailBody = "A new incident has been created and assigned to you. \n Incident Subject: " + newlyCreatedIncident.subject + "\n" + "Created By: " + newlyCreatedIncident.requester.fullname + "\n Description: " + newlyCreatedIncident.description + "\n Link: http://localhost:9000/#/incident/" + newlyCreatedIncident.id;
+
+            sendEmail("A new incident has been created and assigned to you", emailBody, contactEmailId);
+    }
 	
 	// delete an existing incident based on the incident id
 	public static Result delete(int incident) {

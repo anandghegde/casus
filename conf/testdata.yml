@@ -14,7 +14,7 @@ assignees:
       username:   jacksmith
       password:   $2a$10$g6YPYnUM1XEfsL55.xdH1u2Ug0C6CGMVLNgw5MG0oKCOlBp1ksIde
       fullname:   Jack Smith
-      email:      jack@bigsoftware.com
+      email:      dbahirva@akamai.com
       active:     true
 
   - !!models.Assignee

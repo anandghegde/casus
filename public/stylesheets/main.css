@@ -70,9 +70,6 @@ body {
   /* .push must be the same height as footer */
   height: 100px; 
 }
-.site-footer {
-  background: #101010;
-}
 
 #footer-content {
 		margin-top: 20px;
@@ -155,4 +152,23 @@ body {
     -webkit-transform: translateY(-10%);
     transform: translateY(-10%);
   }
+}
+/* navbar */
+.navbar-default {
+    background-color: #0193ce;
+    background: #0193ce;
+    border-color: #E7E7E7;
+    
+}
+.navbar-inner {
+    background-color: #0193ce; 
+    background: #0193ce;
+    background-image: none;
+    background-repeat: no-repeat;
+    filter: none;
+    
+}
+
+.site-footer, .navbar .navbar-inverse .navbar-fixed-top .container{
+  background: #0193ce;
 }
